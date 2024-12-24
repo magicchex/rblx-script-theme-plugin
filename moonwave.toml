@@ -1,5 +1,5 @@
-title = "Template Documentation"
-gitRepoUrl = "https://github.com/magicchex/roblox-template"  
+title = "Roblox Script Theme Plugin"
+gitRepoUrl = "https://github.com/magicchex/rblx-script-theme-plugin"  
 
 gitSourceBranch = "master"
 changelog = true
@@ -12,7 +12,7 @@ onBrokenMarkdownLinks = "warn"
 
 [footer]
 style = "dark"
-copyright = "Copyright © 2024 <username>. Built with Moonwave and Docusaurus"
+copyright = "Copyright © 2024 magicchex. Built with Moonwave and Docusaurus"
 
 # [[footer.links]]
 # title = "examples"
