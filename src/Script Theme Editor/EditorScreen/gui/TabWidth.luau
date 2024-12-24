@@ -1,5 +1,8 @@
 --TODO: Make an option template so I can clone for every setting!
-local Studio = settings().Studio
+local Studio = settings().Studio --[[
+game:GetService("Studio") was superceded by settings().Studio. Remember!
+Reason: Roblox Studio automatically calls Studio and only allows one instance to be run. (AKA singleton)
+]] --
 
 local container = Instance.new('Frame')
 container.BackgroundColor3 = Color3.new(0, 0, 0)
