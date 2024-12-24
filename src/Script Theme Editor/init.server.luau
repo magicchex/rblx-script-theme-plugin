@@ -1,8 +1,9 @@
 local Config = require(script.Config)
-local ContentModule = require(script.Content)
+local EditorScreen = require(script.EditorScreen)
 
 assert(plugin, 'Must be run as an plugin!')
 assert(Config, 'Missing Config File')
+assert(EditorScreen, 'Missing Editor Gui')
 
 local toolbar = plugin:CreateToolbar(Config.Toolbar.name)
 local toggleWindowButton = toolbar:CreateButton(
@@ -22,7 +23,7 @@ toggleWindowButton.Click:Connect(function()
 		dockWindow = plugin:CreateDockWidgetPluginGui(Config.Window.windowId, Config.Window.windowInfo)
 		dockWindow.Title = 'Script Theme Editor'
 		dockWindow:BindToClose(dockClose)
-		ContentModule:Assign(dockWindow)
+		EditorScreen:Assign(dockWindow)
 	end
 	dockWindow.Enabled = not dockWindow.Enabled
 end)
