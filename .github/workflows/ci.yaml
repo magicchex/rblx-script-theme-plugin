@@ -57,8 +57,9 @@ jobs:
             echo "Skipped Wally."
           fi
 
-      - name: Deploy Place to Roblox
-        run: rojo upload --asset_id $PLACE_ID --universe_id $UNIVERSE_ID --api_key $PLACE_PUBLISHING_KEY
+      - name: Build Plugin
+        run: rojo build --output script-theme-editor.rbxm
+      # TODO: Add Automated Github releases and update roblox plugin store
   deploy-documentation:
     permissions:
       contents: write
