@@ -1,4 +1,5 @@
 local Config = require(script.Config)
+local ContentModule = require(script.Content)
 
 assert(plugin, 'Must be run as an plugin!')
 assert(Config, 'Missing Config File')
@@ -21,6 +22,7 @@ toggleWindowButton.Click:Connect(function()
 		dockWindow = plugin:CreateDockWidgetPluginGui(Config.Window.windowId, Config.Window.windowInfo)
 		dockWindow.Title = 'Script Theme Editor'
 		dockWindow:BindToClose(dockClose)
+		ContentModule:Assign(dockWindow)
 	end
 	dockWindow.Enabled = not dockWindow.Enabled
 end)
