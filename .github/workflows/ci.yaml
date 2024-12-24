@@ -14,10 +14,7 @@ env:
   GIT_USERNAME: GitHub Actions
   REPOSITORY_NAME: ${{ github.repository }}
   SOURCE_FOLDER: src
-  UNIVERSE_ID: ${{ vars.UNIVERSE_ID }}
-  PLACE_ID: ${{ vars.PLACE_ID }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  PLACE_PUBLISHING_KEY: ${{ secrets.PLACE_PUBLISHING_KEY }}
 jobs:
   deploy-place-to-roblox:
     permissions:
