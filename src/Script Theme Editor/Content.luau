@@ -1,16 +1,18 @@
 local Content = {}
 
 function Content:Assign(window: DockWidgetPluginGui)
-	local ScreenOne = Instance.new('ScreenGui')
-	local ScreenOne_Frame = Instance.new('Frame')
-	ScreenOne_Frame.Parent = ScreenOne
-	ScreenOne_Frame.BackgroundColor3 = Color3.new(1, 1, 1)
-	ScreenOne_Frame.Size = UDim2.new(1, 0, 1, 0)
-	ScreenOne_Frame.Position = UDim2.new(0, 0, 0, 0)
-	ScreenOne_Frame.BorderSizePixel = 0
-
-	ScreenOne.Parent = window
-	ScreenOne.Enabled = true
+	if not window:IsA('DockWidgetPluginGui') then
+		warn(string.format('Invalid DockWidgetPluginGui. Got "%s"', window.ClassName))
+		return
+	end
+	local editorBackground = Instance.new('Frame')
+	editorBackground.Size = UDim2.new(1, 0, 1, 0)
+	editorBackground.AnchorPoint = Vector2.new(0, 0)
+	editorBackground.Position = UDim2.new(0, 0, 0, 0)
+	editorBackground.BackgroundColor3 = Color3.new(1, 0, 0)
+	editorBackground.BorderSizePixel = 0
+	editorBackground.Visible = true
+	editorBackground.Parent = window
 end
 
 return Content
