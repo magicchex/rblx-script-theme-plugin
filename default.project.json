@@ -1,51 +1,6 @@
 {
-  "name": "Script Theme Editor",
+  "name": "Script Theme Editor Plugin",
   "tree": {
-    "$className": "DataModel",
-
-    "ReplicatedStorage": {
-      "Packages": {
-        "$className": "Folder",
-        "$path": "Packages/"
-      },
-      "$path": "src/shared"
-    },
-
-    "ServerScriptService": {
-      "$path": "src/server"
-    },
-
-    "StarterPlayer": {
-      "StarterPlayerScripts": {
-        "$path": "src/client/player"
-      },
-      "StarterCharacterScripts": {
-        "$path": "src/client/character"
-      }
-    },
-
-    "Workspace": {
-      "$properties": {
-        "FilteringEnabled": true
-      }
-    },
-    "Lighting": {
-      "$properties": {
-        "Ambient": [
-          0,
-          0,
-          0
-        ],
-        "Brightness": 2,
-        "GlobalShadows": true,
-        "Outlines": false,
-        "Technology": "Voxel"
-      }
-    },
-    "SoundService": {
-      "$properties": {
-        "RespectFilteringEnabled": true
-      }
-    }
+    "$path": "src/Script Theme Editor"
   }
 }
