@@ -4,6 +4,9 @@ local function correctNumber(textBox, success, result)
 		if result < 1 then
 			result = 1
 		end
+		if result > 8 then
+			result = 8
+		end
 		Studio['Tab Width'] = result
 	end
 	textBox.Text = Studio['Tab Width']
