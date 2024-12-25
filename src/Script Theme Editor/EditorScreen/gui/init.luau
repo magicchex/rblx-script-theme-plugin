@@ -1,5 +1,5 @@
 local gui = {}
-for _, module: ModuleScript in pairs(script:GetChildren()) do
+for _, module: ModuleScript in ipairs(script:GetChildren()) do
 	if module.Name:lower():match('template') then
 		continue
 	end
