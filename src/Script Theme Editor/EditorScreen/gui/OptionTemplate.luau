@@ -96,14 +96,17 @@ function OptionTemplate.newNumberInput(labelText: string?, optionalFunc: (TextBo
 end
 function OptionTemplate.newToggleInput(
 	labelText: string?,
-	optionalFunc: (ImageButton, boolean, Content, Content, Content) -> ()
+	optionalFunc: (ImageButton, boolean, string, string, string) -> ()
 )
 	local container = createTemplateWithoutOptions(labelText)
 	local input = Instance.new('ImageButton')
 	input:SetAttribute('toggle', false)
-	local uncheck = Content.fromUri('rbxasset://textures/CollisonGroupsEditor/unchecked.png')
-	local press = Content.fromUri('rbxasset://textures/CollisionGroupsEditor/checked-whitebg.png')
-	local check = Content.fromUri('rbxasset://textures/CollisionGroupsEditor/checked-bluebg.png')
+	-- local uncheck = Content.fromUri('rbxasset://textures/CollisonGroupsEditor/unchecked.png')
+	-- local press = Content.fromUri('rbxasset://textures/CollisionGroupsEditor/checked-whitebg.png')
+	-- local check = Content.fromUri('rbxasset://textures/CollisionGroupsEditor/checked-bluebg.png')
+	local uncheck = 'rbxasset://textures/CollisonGroupsEditor/unchecked.png'
+	local press = 'rbxasset://textures/CollisionGroupsEditor/checked-whitebg.png'
+	local check = 'rbxasset://textures/CollisionGroupsEditor/checked-bluebg.png'
 	input.Image = uncheck
 	input.PressedImage = press
 	input.Size = UDim2.new(0.5, 0, 1, 0)
