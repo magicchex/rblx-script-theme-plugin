@@ -12,15 +12,15 @@ function EditorScreen:Assign(window: DockWidgetPluginGui)
 	uiListLayout.Padding = UDim.new(0, 0)
 	uiListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 	uiListLayout.Wraps = false
-	uiListLayout.Parent = gui.background
+	uiListLayout.Parent = gui.Background
 
-	-- gui.background.Parent = StarterGui
-	gui.background.Parent = window
+	-- gui.Background.Parent = StarterGui
+	gui.Background.Parent = window
 	for _, childGui in pairs(gui) do
-		if childGui == gui.background then
+		if childGui == gui.Background then
 			continue
 		end
-		childGui.Parent = gui.background
+		childGui.Parent = gui.Background
 	end
 end
 
