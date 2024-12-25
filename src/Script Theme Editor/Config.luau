@@ -10,7 +10,7 @@ Config.Toolbar = {
 		toggleWindowButton = {
 			id = 'Not_Chex.ScriptThemeEditor.ToggleWindow',
 			tooltip = 'Opens an window',
-			image = 'rbxasset://textures/blank.png',
+			image = 'rbxasset://textures/MenuBar/icon_menu.png',
 			label = 'Toggle Window',
 		},
 	},
