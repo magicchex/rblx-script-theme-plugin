@@ -43,6 +43,9 @@ Config.EditorScreen = {
 		toggleInput = function(imageButton: ImageButton)
 			return
 		end,
+		toolTip = function(textBox: TextBox)
+			return
+		end,
 	},
 	defaultSize = UDim2.new(1, 0, 0.02, 0),
 }
