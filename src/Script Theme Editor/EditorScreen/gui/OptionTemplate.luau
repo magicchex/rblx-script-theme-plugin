@@ -1,4 +1,3 @@
-local Studio = settings().Studio
 local OptionTemplate = {}
 
 local function createTemplateWithoutOptions(labelText: string?)
