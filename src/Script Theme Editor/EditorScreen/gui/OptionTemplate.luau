@@ -1,10 +1,11 @@
+local Config = require(script.Parent.Parent.Parent.Config).EditorScreen
 local OptionTemplate = {}
 
 local function createTemplateWithoutOptions(labelText: string?)
 	local container = Instance.new('Frame')
-	container.BackgroundColor3 = Color3.new(0, 0, 0)
+	container.BackgroundColor3 = Config.Colors.primary
 	container.BorderSizePixel = 0
-	container.Size = UDim2.new(1, 0, 0.2, 0)
+	container.Size = Config.defaultSize
 	container.Visible = true
 
 	local uiListLayout = Instance.new('UIListLayout')
@@ -18,8 +19,8 @@ local function createTemplateWithoutOptions(labelText: string?)
 	label.TextTruncate = Enum.TextTruncate.AtEnd
 	label.BorderSizePixel = 0
 	label.BackgroundTransparency = 0
-	label.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
-	label.TextColor3 = Color3.new(0, 0, 0)
+	label.BackgroundColor3 = Config.Colors.secondary
+	label.TextColor3 = Config.Colors.primary
 	label.TextTransparency = 0
 	label.TextStrokeTransparency = 1
 	label.TextXAlignment = Enum.TextXAlignment.Center
@@ -37,7 +38,11 @@ local function createTemplateWithoutOptions(labelText: string?)
 	return container
 end
 
-function OptionTemplate.newTextInput(labelText: string?, optionalFunc: (TextBox) -> ())
+function OptionTemplate.newTextInput(
+	labelText: string?,
+	uiOverrideFunc: (TextBox) -> (),
+	focusLostEvent: (TextBox) -> ()
+)
 	local container = createTemplateWithoutOptions(labelText)
 
 	local input = Instance.new('TextBox')
@@ -45,8 +50,8 @@ function OptionTemplate.newTextInput(labelText: string?, optionalFunc: (TextBox)
 	input.TextTruncate = Enum.TextTruncate.AtEnd
 	input.BorderSizePixel = 0
 	input.BackgroundTransparency = 0
-	input.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
-	input.TextColor3 = Color3.new(0, 0, 0)
+	input.BackgroundColor3 = Config.Colors.secondary
+	input.TextColor3 = Config.Colors.primary
 	input.TextTransparency = 0
 	input.TextStrokeTransparency = 1
 	input.PlaceholderText = 'Type an number...'
@@ -60,21 +65,27 @@ function OptionTemplate.newTextInput(labelText: string?, optionalFunc: (TextBox)
 	input.Size = UDim2.new(0.5, 0, 1, 0)
 	input.Visible = true
 	input.Parent = container
+	pcall(Config.OptionUIOverride.textInput, input)
+	pcall(uiOverrideFunc, input)
 
 	input.FocusLost:Connect(function(_, __)
-		pcall(optionalFunc, input)
+		pcall(focusLostEvent, input)
 	end)
 	return container
 end
-function OptionTemplate.newNumberInput(labelText: string?, optionalFunc: (TextBox, boolean, number?) -> ())
+function OptionTemplate.newNumberInput(
+	labelText: string?,
+	uiOverrideFunc: (TextBox) -> (),
+	focusLostEvent: (TextBox, boolean, number?) -> ()
+)
 	local container = createTemplateWithoutOptions(labelText)
 	local input = Instance.new('TextBox')
 	input.LayoutOrder = 1
 	input.TextTruncate = Enum.TextTruncate.AtEnd
 	input.BorderSizePixel = 0
 	input.BackgroundTransparency = 0
-	input.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
-	input.TextColor3 = Color3.new(0, 0, 0)
+	input.BackgroundColor3 = Config.Colors.secondary
+	input.TextColor3 = Config.Colors.primary
 	input.TextTransparency = 0
 	input.TextStrokeTransparency = 1
 	input.PlaceholderText = 'Type an number...'
@@ -87,43 +98,48 @@ function OptionTemplate.newNumberInput(labelText: string?, optionalFunc: (TextBo
 	input.Size = UDim2.new(0.5, 0, 1, 0)
 	input.Visible = true
 	input.Parent = container
+	pcall(Config.OptionUIOverride.numberInput, input)
+	pcall(uiOverrideFunc, input)
 
 	input.FocusLost:Connect(function(_, __)
 		local success, result = pcall(tonumber, input.Text)
-		pcall(optionalFunc, input, success, result)
+		pcall(focusLostEvent, input, success, result)
 	end)
 	return container
 end
 function OptionTemplate.newToggleInput(
 	labelText: string?,
-	optionalFunc: (ImageButton, boolean, string, string, string) -> ()
+	uiOverrideFunc: (ImageButton) -> (),
+	clickEvent: (ImageButton, boolean, string, string, string) -> ()
 )
 	local container = createTemplateWithoutOptions(labelText)
 	local input = Instance.new('ImageButton')
 	input:SetAttribute('toggle', false)
-	-- local uncheck = Content.fromUri('rbxasset://textures/CollisonGroupsEditor/unchecked.png')
-	-- local press = Content.fromUri('rbxasset://textures/CollisionGroupsEditor/checked-whitebg.png')
-	-- local check = Content.fromUri('rbxasset://textures/CollisionGroupsEditor/checked-bluebg.png')
-	local uncheck = 'rbxasset://textures/CollisionGroupsEditor/unchecked.png'
-	local press = 'rbxasset://textures/CollisionGroupsEditor/checked-whitebg.png'
-	local check = 'rbxasset://textures/CollisionGroupsEditor/checked-bluebg.png'
-	input.Image = uncheck
-	input.PressedImage = press
+	-- local disabledImage = Content.fromUri(Config.Images.toggleDisabled)
+	-- local heldDownImage = Content.fromUri(Config.Images.toggleDown)
+	-- local enabledImage = Content.fromUri(Config.Images.toggleEnabled)
+	local disabledImage = Config.Images.toggleDisabled
+	local heldDownImage = Config.Images.toggleDown
+	local enabledImage = Config.Images.toggleEnabled
+	input.Image = disabledImage
+	input.PressedImage = heldDownImage
 	input.Size = UDim2.new(0.5, 0, 1, 0)
 	input.ResampleMode = Enum.ResamplerMode.Pixelated
 	input.ScaleType = Enum.ScaleType.Fit
-	input.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
+	input.BackgroundColor3 = Config.Colors.secondary
 	input.BorderSizePixel = 0
 	input.Visible = true
 	input.Parent = container
+	pcall(Config.OptionUIOverride.toggleInput, input)
+	pcall(uiOverrideFunc, input)
 
 	input.MouseButton1Click:Connect(function()
 		input:SetAttribute('toggle', not input:GetAttribute('toggle'))
-		input.Image = uncheck
+		input.Image = disabledImage
 		if input:GetAttribute('toggle') then
-			input.Image = check
+			input.Image = enabledImage
 		end
-		pcall(optionalFunc, input, input:GetAttribute('toggle'), uncheck, press, check)
+		pcall(clickEvent, input, input:GetAttribute('toggle'), disabledImage, heldDownImage, enabledImage)
 	end)
 
 	return container
