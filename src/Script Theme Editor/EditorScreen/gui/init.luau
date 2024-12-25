@@ -5,5 +5,4 @@ for _, module: ModuleScript in ipairs(script:GetChildren()) do
 	end
 	gui[module.Name] = require(module)
 end
-print(gui)
 return gui
