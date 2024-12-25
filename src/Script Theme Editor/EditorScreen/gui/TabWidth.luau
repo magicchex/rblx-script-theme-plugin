@@ -8,8 +8,10 @@ local function correctNumber(textBox, success, result)
 	end
 	textBox.Text = Studio['Tab Width']
 end
-
+local function overrideUI(textBox: TextBox)
+	textBox.Text = Studio['Tab Width']
+end
 local OptionTemplate = require(script.Parent.OptionTemplate)
-local container = OptionTemplate.newNumberInput('Tab Width', correctNumber)
+local container = OptionTemplate.newNumberInput('Tab Width', overrideUI, correctNumber)
 
 return container
