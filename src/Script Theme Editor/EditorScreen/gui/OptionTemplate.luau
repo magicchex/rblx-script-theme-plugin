@@ -1,6 +1,5 @@
 local Config = require(script.Parent.Parent.Parent.Config).EditorScreen
 local OptionTemplate = {}
-
 local function createTemplateWithoutOptions(labelText: string?)
 	local container = Instance.new('Frame')
 	container.BackgroundColor3 = Config.Colors.primary
@@ -38,9 +37,37 @@ local function createTemplateWithoutOptions(labelText: string?)
 	return container
 end
 
+local function insertToolTip(guiObject: GuiObject, toolTipText: string?)
+	--tooltip not showing
+	local toolTip = Instance.new('TextBox')
+	toolTip.Size = UDim2.fromScale(0.08, 0.08)
+	toolTip.AnchorPoint = Vector2.zero
+	toolTip.TextScaled = true
+	toolTip.TextEditable = false
+	toolTip.BackgroundColor3 = Config.Colors.highlight
+	toolTip.TextColor3 = Config.Colors.primary
+	toolTip.TextStrokeTransparency = 1
+	if type(toolTipText) ~= 'string' then
+		toolTipText = 'Placeholder Text'
+	end
+	toolTip.Text = toolTipText
+	toolTip.Parent = guiObject
+	toolTip.Visible = false
+	toolTip.TextWrapped = true
+	pcall(Config.OptionUIOverride.toolTip, toolTip)
+	guiObject.MouseMoved:Connect(function(mx, my)
+		toolTip.Visible = true
+		toolTip.Position = UDim2.fromOffset(mx, my)
+	end)
+	guiObject.MouseLeave:Connect(function(_, __)
+		toolTip.Visible = false
+	end)
+	return toolTip
+end
+
 function OptionTemplate.newTextInput(
 	labelText: string?,
-	uiOverrideFunc: (TextBox) -> (),
+	uiOverrideFunc: (TextBox, TextBox) -> (),
 	focusLostEvent: (TextBox) -> ()
 )
 	local container = createTemplateWithoutOptions(labelText)
@@ -66,7 +93,8 @@ function OptionTemplate.newTextInput(
 	input.Visible = true
 	input.Parent = container
 	pcall(Config.OptionUIOverride.textInput, input)
-	pcall(uiOverrideFunc, input)
+	local toolTip = insertToolTip(input)
+	pcall(uiOverrideFunc, input, toolTip)
 
 	input.FocusLost:Connect(function(_, __)
 		pcall(focusLostEvent, input)
@@ -75,7 +103,7 @@ function OptionTemplate.newTextInput(
 end
 function OptionTemplate.newNumberInput(
 	labelText: string?,
-	uiOverrideFunc: (TextBox) -> (),
+	uiOverrideFunc: (TextBox, TextBox) -> (),
 	focusLostEvent: (TextBox, boolean, number?) -> ()
 )
 	local container = createTemplateWithoutOptions(labelText)
@@ -99,7 +127,8 @@ function OptionTemplate.newNumberInput(
 	input.Visible = true
 	input.Parent = container
 	pcall(Config.OptionUIOverride.numberInput, input)
-	pcall(uiOverrideFunc, input)
+	local toolTip = insertToolTip(input)
+	pcall(uiOverrideFunc, input, toolTip)
 
 	input.FocusLost:Connect(function(_, __)
 		local success, result = pcall(tonumber, input.Text)
@@ -109,7 +138,7 @@ function OptionTemplate.newNumberInput(
 end
 function OptionTemplate.newToggleInput(
 	labelText: string?,
-	uiOverrideFunc: (ImageButton) -> (),
+	uiOverrideFunc: (ImageButton, TextBox) -> (),
 	clickEvent: (ImageButton, boolean, string, string, string) -> ()
 )
 	local container = createTemplateWithoutOptions(labelText)
@@ -131,7 +160,8 @@ function OptionTemplate.newToggleInput(
 	input.Visible = true
 	input.Parent = container
 	pcall(Config.OptionUIOverride.toggleInput, input)
-	pcall(uiOverrideFunc, input)
+	local toolTip = insertToolTip(input)
+	pcall(uiOverrideFunc, input, toolTip)
 
 	input.MouseButton1Click:Connect(function()
 		input:SetAttribute('toggle', not input:GetAttribute('toggle'))
