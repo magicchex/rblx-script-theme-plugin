@@ -44,6 +44,6 @@ Config.EditorScreen = {
 			return
 		end,
 	},
-	defaultSize = UDim2.new(1, 0, 0.2, 0),
+	defaultSize = UDim2.new(1, 0, 0.02, 0),
 }
 return Config
