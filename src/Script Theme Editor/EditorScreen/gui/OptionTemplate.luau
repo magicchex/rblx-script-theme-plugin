@@ -104,7 +104,7 @@ function OptionTemplate.newToggleInput(
 	-- local uncheck = Content.fromUri('rbxasset://textures/CollisonGroupsEditor/unchecked.png')
 	-- local press = Content.fromUri('rbxasset://textures/CollisionGroupsEditor/checked-whitebg.png')
 	-- local check = Content.fromUri('rbxasset://textures/CollisionGroupsEditor/checked-bluebg.png')
-	local uncheck = 'rbxasset://textures/CollisonGroupsEditor/unchecked.png'
+	local uncheck = 'rbxasset://textures/CollisionGroupsEditor/unchecked.png'
 	local press = 'rbxasset://textures/CollisionGroupsEditor/checked-whitebg.png'
 	local check = 'rbxasset://textures/CollisionGroupsEditor/checked-bluebg.png'
 	input.Image = uncheck
