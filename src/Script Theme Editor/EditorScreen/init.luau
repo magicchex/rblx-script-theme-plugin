@@ -1,5 +1,5 @@
 local StarterGui = game:GetService('StarterGui') -- Testing Purposes
-local gui = require(script.gui)
+local gui = require(script.Gui)
 local EditorScreen = {}
 
 function EditorScreen:Assign(window: DockWidgetPluginGui)
