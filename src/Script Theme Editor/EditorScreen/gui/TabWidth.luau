@@ -8,6 +8,7 @@ local function correctNumber(textBox, success, result)
 	end
 	textBox.Text = Studio['Tab Width']
 end
+
 local OptionTemplate = require(script.Parent.OptionTemplate)
 local container = OptionTemplate.newNumberInput('Tab Width', correctNumber)
 
