@@ -19,6 +19,8 @@ Config.Toolbar = {
 Config.Window = {
 	windowId = string.format('%s.%s', _shared.author, _shared.title),
 	windowInfo = DockWidgetPluginGuiInfo.new(Enum.InitialDockState.Float, false, true, 480, 360, 2, 2),
+	colorPickerWindow = string.format('%s.ColorPicker', _shared.author),
+	colorPickerWindowInfo = DockWidgetPluginGuiInfo.new(Enum.InitialDockState.Float, false, true, 256, 256, 256, 256),
 }
 
 Config.EditorScreen = {

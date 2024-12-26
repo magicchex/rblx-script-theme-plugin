@@ -1,5 +1,6 @@
 local Config = require(script.Config)
 local EditorScreen = require(script.EditorScreen)
+local ColorPicker = require(script.ColorPicker)
 
 assert(plugin, 'Must be run as an plugin!')
 assert(Config, 'Missing Config File')
@@ -14,16 +15,26 @@ local toggleWindowButton = toolbar:CreateButton(
 )
 toggleWindowButton.ClickableWhenViewportHidden = true
 local dockWindow = nil
+local colorPickerWindow = nil
 local function dockClose()
 	toggleWindowButton:SetActive(false)
 	dockWindow.Enabled = false
+	colorPickerWindow.Enabled = false
 end
 toggleWindowButton.Click:Connect(function()
 	if not dockWindow then
 		dockWindow = plugin:CreateDockWidgetPluginGui(Config.Window.windowId, Config.Window.windowInfo)
 		dockWindow.Title = 'Script Theme Editor'
 		dockWindow:BindToClose(dockClose)
-		EditorScreen:Assign(dockWindow)
+		local editorScreen = EditorScreen:Assign(dockWindow)
+	end
+	if not colorPickerWindow then
+		colorPickerWindow =
+			plugin:CreateDockWidgetPluginGui(Config.Window.colorPickerWindow, Config.Window.colorPickerWindowInfo)
+		colorPickerWindow.Title = 'Color Picker'
+		colorPickerWindow:BindToClose(dockClose)
+		local colorPickerScreen = ColorPicker:Assign(colorPickerWindow)
+		colorPickerWindow.Enabled = true
 	end
 	dockWindow.Enabled = not dockWindow.Enabled
 end)
