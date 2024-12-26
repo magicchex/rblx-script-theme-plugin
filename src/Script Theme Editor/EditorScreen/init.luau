@@ -2,10 +2,10 @@ local StarterGui = game:GetService('StarterGui') -- Testing Purposes
 local gui = require(script.Gui)
 local EditorScreen = {}
 
-function EditorScreen:Assign(window: DockWidgetPluginGui)
+function EditorScreen:Assign(window: DockWidgetPluginGui): Frame?
 	if not window:IsA('DockWidgetPluginGui') then
 		warn(string.format('Invalid DockWidgetPluginGui. Got "%s"', window.ClassName))
-		return
+		return nil
 	end
 	local uiListLayout = Instance.new('UIListLayout')
 	uiListLayout.FillDirection = Enum.FillDirection.Vertical
@@ -22,6 +22,7 @@ function EditorScreen:Assign(window: DockWidgetPluginGui)
 		end
 		childGui.Parent = gui.Background
 	end
+	return gui.Background
 end
 
 return EditorScreen
