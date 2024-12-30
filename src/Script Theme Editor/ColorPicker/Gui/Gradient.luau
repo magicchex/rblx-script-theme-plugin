@@ -37,6 +37,15 @@ if not editableImage then
 end
 updateGradient(editableImage)
 
+local container = Instance.new('Frame')
+container.BackgroundTransparency = 1
+container.BorderSizePixel = 0
+container.Size = UDim2.fromScale(1, 1)
+container.AnchorPoint = Vector2.new(0, 0)
+container.Position = UDim2.fromOffset(0, 0)
+
+local UIListLayout = Instance.new('UIListLayout')
+
 local gradient = Instance.new('ImageButton')
 gradient.BackgroundColor3 = Color3.new(1, 0, 1)
 gradient.BackgroundTransparency = 0
@@ -46,7 +55,9 @@ gradient.AutoButtonColor = false
 gradient.ScaleType = Enum.ScaleType.Fit
 gradient.ImageContent = Content.fromObject(editableImage)
 gradient.Size = UDim2.fromScale(1, 1)
+gradient.ZIndex = 0
 gradient.AnchorPoint = Vector2.zero
+gradient.Parent = container
 
 local crosshair = Instance.new('ImageLabel')
 crosshair.Interactable = false
@@ -61,4 +72,4 @@ crosshair.Visible = true
 crosshair.Parent = gradient
 crosshair.ZIndex = 100
 
-return gradient
+return container
