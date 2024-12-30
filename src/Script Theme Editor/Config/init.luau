@@ -1,62 +1,15 @@
-local Config = {}
-local _shared = {
-	author = 'Not_Chex',
-	title = 'Script Theme Editor',
-}
+local DefaultInstance = require(script.DefaultInstances)
+local Toolbar = require(script.Toolbar)
+local Window = require(script.Window)
+local Colors = require(script.Colors)
+local Images = require(script.Images)
+local EditorScreen = require(script.EditorScreen)
 
-Config.Defaults = {}
-local default_UIListLayout = Instance.new('UIListLayout')
-default_UIListLayout.FillDirection = Enum.FillDirection.Vertical
-default_UIListLayout.Padding = UDim.new(0, 0)
-default_UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-default_UIListLayout.Wraps = true
-Config.Defaults.UIListLayout = default_UIListLayout
-
-Config.Toolbar = {
-	name = _shared.title,
-	buttons = {
-		toggleWindowButton = {
-			id = 'Not_Chex.ScriptThemeEditor.ToggleWindow',
-			tooltip = 'Opens an window',
-			image = 'rbxasset://textures/MenuBar/icon_menu.png',
-			label = 'Toggle Window',
-		},
-	},
+return {
+	defaultInstance = DefaultInstance,
+	toolbar = Toolbar,
+	window = Window,
+	color = Colors,
+	image = Images,
+	editorScreen = EditorScreen,
 }
-
-Config.Window = {
-	windowId = string.format('%s.%s', _shared.author, _shared.title),
-	windowInfo = DockWidgetPluginGuiInfo.new(Enum.InitialDockState.Float, false, true, 480, 360, 2, 2),
-	colorPickerWindow = string.format('%s.ColorPicker', _shared.author),
-	colorPickerWindowInfo = DockWidgetPluginGuiInfo.new(Enum.InitialDockState.Float, false, true, 256, 256, 256, 256),
-}
-
-Config.EditorScreen = {
-	Colors = {
-		primary = Color3.fromHex('1C2321'),
-		secondary = Color3.fromHex('5E6572'),
-		highlight = Color3.fromHex('A9B4C2'),
-		important = Color3.fromHex('FFEE93'),
-	},
-	Images = {
-		toggleEnabled = 'rbxasset://textures/CollisionGroupsEditor/checked-bluebg.png',
-		toggleDown = 'rbxasset://textures/CollisionGroupsEditor/checked-whitebg.png',
-		toggleDisabled = 'rbxasset://textures/CollisionGroupsEditor/unchecked.png',
-	},
-	OptionUIOverride = {
-		textInput = function(textBox: TextBox)
-			return
-		end,
-		numberInput = function(textBox: TextBox)
-			return
-		end,
-		toggleInput = function(imageButton: ImageButton)
-			return
-		end,
-		toolTip = function(textBox: TextBox)
-			return
-		end,
-	},
-	defaultSize = UDim2.new(1, 0, 0.02, 0),
-}
-return Config
