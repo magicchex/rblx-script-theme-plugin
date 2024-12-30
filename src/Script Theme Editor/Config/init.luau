@@ -4,6 +4,14 @@ local _shared = {
 	title = 'Script Theme Editor',
 }
 
+Config.Defaults = {}
+local default_UIListLayout = Instance.new('UIListLayout')
+default_UIListLayout.FillDirection = Enum.FillDirection.Vertical
+default_UIListLayout.Padding = UDim.new(0, 0)
+default_UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+default_UIListLayout.Wraps = true
+Config.Defaults.UIListLayout = default_UIListLayout
+
 Config.Toolbar = {
 	name = _shared.title,
 	buttons = {
